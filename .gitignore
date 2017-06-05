@@ -2,3 +2,6 @@
 .google
 .idea
 hello-gl/.externalNativeBuild
+/local.properties
+/build
+/captures
