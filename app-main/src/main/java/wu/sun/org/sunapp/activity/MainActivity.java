@@ -1,6 +1,7 @@
 package wu.sun.org.sunapp.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,23 +17,42 @@ import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 import wu.sun.org.sunapp.R;
+import wu.sun.org.sunapp.gson.GsonTry;
+import wu.sun.org.sunapp.permissions.PermissionsTry;
+import wu.sun.org.sunapp.util.ITry;
 
 @RuntimePermissions
 public class MainActivity extends AppCompatActivity {
 
+    ITry mTry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTry = createTry();
+
         //添加一个点击事件
         findViewById(R.id.btn_try).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                new DynamicTry().doTry(MainActivity.this);
-                MainActivityPermissionsDispatcher.showCameraWithCheck(MainActivity.this);
+                mTry.doTry(MainActivity.this);
             }
         });
+    }
+
+    private ITry createTry() {
+        return new GsonTry();
+    }
+
+    private ITry createPermisstionTry() {
+        return new PermissionsTry() {
+            @Override
+            public void doTry(Context context) {
+                super.doTry(context);
+                MainActivityPermissionsDispatcher.showCameraWithCheck(MainActivity.this);
+            }
+        };
     }
 
     @Override
@@ -43,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     @NeedsPermission(Manifest.permission.CAMERA)
     void showCamera() {
+        if (mTry instanceof PermissionsTry) {
+//            mTry.
+        }
         Toast.makeText(this, "show Camera", Toast.LENGTH_SHORT).show();
     }
 
