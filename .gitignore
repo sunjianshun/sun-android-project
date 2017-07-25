@@ -5,3 +5,5 @@ hello-gl/.externalNativeBuild
 /local.properties
 /build
 /captures
+plugin-demo.iml
+app-main.iml
