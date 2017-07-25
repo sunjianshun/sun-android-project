@@ -1,3 +1,3 @@
-include ':app-main', ':plugin-demo',
+include ':app-main', ':plugin-demo', ':tool-impl-generator',
         ':linksgraph',
         ':hello-gl'
