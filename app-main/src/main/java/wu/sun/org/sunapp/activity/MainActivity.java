@@ -17,7 +17,7 @@ import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 import wu.sun.org.sunapp.R;
-import wu.sun.org.sunapp.gson.GsonTry;
+import wu.sun.org.sunapp.okhttp.OkHttpTry;
 import wu.sun.org.sunapp.permissions.PermissionsTry;
 import wu.sun.org.sunapp.util.ITry;
 
@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ITry createTry() {
-        return new GsonTry();
+//        return new GsonTry();
+        return new OkHttpTry();
     }
 
     private ITry createPermisstionTry() {
